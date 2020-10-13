@@ -55,7 +55,7 @@ namespace targetcrash{
             Console.WriteLine("Left Control + P: Dump All Pickups In The World");
             Console.WriteLine("Left Control + O: Set Object To Use");
             Console.WriteLine("Left Control + X: Parent And Allign Object To Selected Player");
-            Console.WriteLine("Left Control + B: Crash Player That U Targetted");
+            Console.WriteLine("Left Control + B: Crash Player That U Targeted");
         }
         public override void OnUpdate(){
             if(Input.GetKey(KeyCode.LeftControl)&&Input.GetKeyDown(KeyCode.X)){
