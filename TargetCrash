@@ -58,7 +58,7 @@ namespace targetcrash{
             Console.WriteLine("Left Control + B: Crash Player That U Targetted");
         }
         public override void OnUpdate(){
-            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.X)){
+            if(Input.GetKey(KeyCode.LeftControl)&&Input.GetKeyDown(KeyCode.X)){
                 var t=PlayerManager.Method_Public_Static_Player_String_0(QuickMenu.prop_QuickMenu_0.prop_APIUser_0.id).field_Internal_VRCPlayer_0.gameObject.transform;
                 foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(objectcrashname)){
                     Networking.SetOwner(VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCPlayerApi_0,b.gameObject);
@@ -66,19 +66,19 @@ namespace targetcrash{
                     b.transform.parent=t;
                 }}
             }
-            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.B)){
+            if(Input.GetKey(KeyCode.LeftControl)&&Input.GetKeyDown(KeyCode.B)){
                 foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(objectcrashname)){
                     Networking.SetOwner(VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCPlayerApi_0,b.gameObject);
                     b.gameObject.transform.SetPositionAndRotation(new Vector3(b.transform.position.x,Vector3.positiveInfinity.y,b.transform.rotation.z),b.transform.rotation);
                     b.transform.parent=null;
                 }}
             }
-            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.P)){
+            if(Input.GetKey(KeyCode.LeftControl)&&Input.GetKeyDown(KeyCode.P)){
                 foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){
                     Console.WriteLine(b.gameObject.name);
                 }
             }
-            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.O)){
+            if(Input.GetKey(KeyCode.LeftControl)&&Input.GetKeyDown(KeyCode.O)){
 		        popup("Object Name","Use",delegate(string a){
                           foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(a.ToLower())){
                               objectcrashname=a;Console.WriteLine(b.gameObject.name);
