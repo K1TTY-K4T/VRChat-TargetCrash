@@ -51,6 +51,7 @@ namespace targetcrash{
     public class Class1:MelonMod{
         public string objectcrashname;
         public override void OnApplicationStart(){
+            Console.WriteLine("Join: discord.gg/PQjc7FT");
             Console.WriteLine("Using Objects To Crash Players 1.0 (this has been around for a very long time and anyone claiming to own this is a skid)");
             Console.WriteLine("Left Control + P: Dump All Pickups In The World");
             Console.WriteLine("Left Control + O: Set Object To Use");
