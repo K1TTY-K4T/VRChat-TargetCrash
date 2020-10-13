@@ -1,0 +1,100 @@
+using Harmony;
+using MelonLoader;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using UnityEngine;
+using VRCSDK2;
+using System.Net.Http;
+using VRC;
+using VRTK.Controllables.ArtificialBased;
+using Transmtn.DTO;
+using UnityEngine.UI;
+using VRC.Core;
+using VRC.UI;
+using VRC.Udon;
+using ThirdParty.iOS4Unity;
+using BestHTTP;
+using Il2CppSystem.Threading.Tasks;
+using Transmtn;
+using System.Threading.Tasks;
+using Il2CppSystem.Threading;
+using UnityEngine.Networking;
+using Newtonsoft.Json;
+using Il2CppMono.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using UnityEngine.SceneManagement;
+using DiskWars;
+using UnhollowerRuntimeLib;
+using UnityEngine.Events;
+using VRC.SDKBase;
+using VRCSDK2.Validation.Performance.Scanners;
+using Steamworks;
+using WebSocketSharp;
+using Transmtn.DTO.Notifications;
+using Il2CppSystem.Security.Cryptography;
+using UnhollowerBaseLib;
+using VRC.UserCamera;
+using Harmony.ILCopying;
+using static VRC.SDKBase.VRC_EventHandler;
+using ExitGames.Client.Photon;
+using RootMotion.Dynamics;
+using VRC.Animation;
+
+namespace targetcrash{
+    public class Class1:MelonMod{
+        public string objectcrashname;
+        public override void OnApplicationStart(){
+            Console.WriteLine("Using Objects To Crash Players 1.0 (this has been around for a very long time and anyone claiming to own this is a skid)");
+            Console.WriteLine("Left Control + P: Dump All Pickups In The World");
+            Console.WriteLine("Left Control + O: Set Object To Use");
+            Console.WriteLine("Left Control + X: Parent And Allign Object To Selected Player");
+            Console.WriteLine("Left Control + B: Crash Player That U Targetted");
+        }
+        public override void OnUpdate(){
+            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.X)){
+                var t=PlayerManager.Method_Public_Static_Player_String_0(QuickMenu.prop_QuickMenu_0.prop_APIUser_0.id).field_Internal_VRCPlayer_0.gameObject.transform;
+                foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(objectcrashname)){
+                    Networking.SetOwner(VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCPlayerApi_0,b.gameObject);
+                    b.gameObject.transform.SetPositionAndRotation(t.position,t.rotation);
+                    b.transform.parent=t;
+                }}
+            }
+            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.B)){
+                foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(objectcrashname)){
+                    Networking.SetOwner(VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCPlayerApi_0,b.gameObject);
+                    b.gameObject.transform.SetPositionAndRotation(new Vector3(b.transform.position.x,Vector3.positiveInfinity.y,b.transform.rotation.z),b.transform.rotation);
+                    b.transform.parent=null;
+                }}
+            }
+            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.P)){
+                foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){
+                    Console.WriteLine(b.gameObject.name);
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.LeftControl)&&Input.GetKey(KeyCode.O)){
+		        popup("Object Name","Use",delegate(string a){
+                          foreach(var b in Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()){if(b.gameObject.name.ToLower().Contains(a.ToLower())){
+                              objectcrashname=a;Console.WriteLine(b.gameObject.name);
+                          }}
+		        });
+            }
+        }
+        void popup(string title, string text, System.Action<string> okaction)
+        {
+            VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_PDM_0(title, "", InputField.InputType.Standard, false, text,
+                DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>
+                (new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>
+                (delegate (string s, Il2CppSystem.Collections.Generic.List<KeyCode> k, Text t)
+                {
+                    okaction(s);
+                })), null, "...", true, null);
+        }
+    }
+}
